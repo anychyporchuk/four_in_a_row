@@ -52,6 +52,7 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="GameController.cs" />
+    <Compile Include="GameModel.cs" />
     <Compile Include="GameView.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -54,8 +54,8 @@ namespace four_in_a_row
         /// </summary>
         private void RestartGame()
         {
+            GameController.RestartGame();
             label1.Text = "Player's " + (GameController.CurrentPlayer + 1) + " turn";
-            GameController.ClearInfo();
             for (int i = 0; i < Constants.COLUMNSC; i++)
             {
                 try

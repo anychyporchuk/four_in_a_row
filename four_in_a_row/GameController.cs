@@ -11,14 +11,11 @@ namespace four_in_a_row
     /// </summary>
     static class GameController
     {
-        private static int[,] board;
-        private static int[] index_empty_coins; //service array indexes of desired empty places in a board
+        
         public static int CurrentPlayer;
         public static bool IsCanPlay;
         static GameController()
         {
-            board = new int[Constants.ROWSC, Constants.COLUMNSC];
-            index_empty_coins = new int[Constants.COLUMNSC];
             CurrentPlayer = 0;
             IsCanPlay = true;
         }
@@ -39,31 +36,18 @@ namespace four_in_a_row
         {
             int res;
             currpl = currpl == 0 ? -1 : 1;
-            res = index_empty_coins[column];
+            res = GameModel.index_empty_coins[column];
 
             if (res < Constants.ROWSC)
             {
-                int isfull = AddCoin(currpl, column);
+                int isfull = GameModel.AddCoin(currpl, column);
                 return isfull == (int)CountOfUsedCoins.FULL ? (int)CountOfUsedCoins.FULL : res;
             }
             else
                 return (int)CountOfUsedCoins.COLUMNFULL;
         }
 
-        /// <summary>
-        /// Adds the coin to the board
-        /// </summary>
-        /// <param name="currpl">index of current player</param>
-        /// <param name="column">the desired column</param>
-        private static int AddCoin(int currpl, int column)
-        {
-            board[index_empty_coins[column], column] = currpl;
-            index_empty_coins[column]++;
-
-            if (index_empty_coins.Sum() == (Constants.COLUMNSC) * (Constants.ROWSC))
-                return (int)CountOfUsedCoins.FULL;
-            else return 0;
-        }
+        
 
 
 
@@ -90,7 +74,7 @@ namespace four_in_a_row
         {
             int countOfIdent = 1;
             for (int i = 1; i < Constants.COLUMNSC; i++)
-                if (board[row, i] != 0 && board[row, i - 1] == board[row, i])
+                if (GameModel.Board[row, i] != 0 && GameModel.Board[row, i - 1] == GameModel.Board[row, i])
                 {
                     countOfIdent++;
                     if (countOfIdent == Constants.COUNTFORWIN) return true;
@@ -108,7 +92,7 @@ namespace four_in_a_row
         {
             int countOfIdent = 1;
             for (int i = 1; i < Constants.ROWSC; i++)
-                if (board[i, col] != 0 && board[i - 1, col] == board[i, col])
+                if (GameModel.Board[i, col] != 0 && GameModel.Board[i - 1, col] == GameModel.Board[i, col])
                 {
                     countOfIdent++;
                     if (countOfIdent == Constants.COUNTFORWIN) return true;
@@ -132,7 +116,7 @@ namespace four_in_a_row
                 {
                     if (row + j - i >= 0 && row + j - i < Constants.ROWSC
                         && col - j + i >= 0 && col - j + i < Constants.COLUMNSC
-                        && board[row, col] == board[row + j - i, col - j + i])
+                        && GameModel.Board[row, col] == GameModel.Board[row + j - i, col - j + i])
                     {
                         countOfIdent++;
                     }
@@ -157,7 +141,7 @@ namespace four_in_a_row
                 {
                     if (row + j - i >= 0 && row + j - i < Constants.ROWSC
                         && col + j - i >= 0 && col + j - i < Constants.COLUMNSC
-                        && board[row, col] == board[row + j - i, col + j - i])
+                        && GameModel.Board[row, col] == GameModel.Board[row + j - i, col + j - i])
                     {
                         countOfIdent++;
                     }
@@ -168,15 +152,11 @@ namespace four_in_a_row
         }
         #endregion
 
-        /// <summary>
-        /// Reinitializes board information
-        /// </summary>
-        public static void ClearInfo()
+        public static void RestartGame()
         {
-            board = new int[Constants.ROWSC, Constants.COLUMNSC];
-            index_empty_coins = new int[Constants.COLUMNSC];
             CurrentPlayer = 0;
             IsCanPlay = true;
+            GameModel.ClearInfo();
         }
     }
 }
