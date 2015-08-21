@@ -62,13 +62,13 @@ namespace four_in_a_row
                 {
                     CoinView coin = (CoinView)panel1.Controls.Find("cv_" + i, false)[0];
                     Graphics g = coin.CreateGraphics();
-                    g.Clear(this.BackColor);
+                    g.Clear(coin.BackColor);
 
                     for (int j = 0; j < Constants.ROWSC; j++)
                     {
                         coin = (CoinView)panel1.Controls.Find("cv_" + j + i, false)[0];
                         g = coin.CreateGraphics();
-                        g.Clear(this.BackColor);
+                        g.Clear(coin.BackColor);
                     }
                 }
                 catch (Exception ex)
@@ -142,8 +142,9 @@ namespace four_in_a_row
         {
             if (GameController.IsCanPlay)
             {
-                Graphics g = (sender as CoinView).CreateGraphics();
-                g.Clear(this.BackColor);
+                CoinView coin = (sender as CoinView);
+                Graphics g = coin.CreateGraphics();
+                g.Clear(coin.BackColor);
             }
 
         }

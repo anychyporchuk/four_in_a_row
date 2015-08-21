@@ -60,7 +60,7 @@ namespace four_in_a_row
         public static bool CheckResult(int row, int col)
         {
             return (СheckHorizontal(row)) || (СheckVertical(col)) ||
-            (СheckLeftDiagonal1(row, col)) || (СheckRightDiagonal1(row, col));
+            (СheckLeftDiagonal(row, col)) || (СheckRightDiagonal(row, col));
         }
 
         #region Service functions for searching
@@ -107,7 +107,7 @@ namespace four_in_a_row
         /// <param name="row">the desired row</param>
         /// <param name="col">the desired column</param>
         /// <returns>result of searching</returns>
-        public static bool СheckLeftDiagonal1(int row, int col)
+        public static bool СheckLeftDiagonal(int row, int col)
         {
             for (int i = 0; i < Constants.COUNTFORWIN; i++)
             {
@@ -132,7 +132,7 @@ namespace four_in_a_row
         /// <param name="row">the desired row</param>
         /// <param name="col">the desired column</param>
         /// <returns>result of searching</returns>
-        public static bool СheckRightDiagonal1(int row, int col)
+        public static bool СheckRightDiagonal(int row, int col)
         {
             for (int i = 0; i < Constants.COUNTFORWIN; i++)
             {
