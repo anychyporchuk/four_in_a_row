@@ -40,12 +40,14 @@ namespace four_in_a_row
             if (GameController.CheckResult(row, col))
             {
                 label1.Text = "Player " + (GameController.CurrentPlayer + 1) + " wins!";
+                label1.ForeColor = Color.Green;
                 GameController.IsCanPlay = false;
             }
             else
             {
                 GameController.CurrentPlayer = (GameController.CurrentPlayer == 1) ? 0 : 1;
                 label1.Text = "Player's " + (GameController.CurrentPlayer + 1) + " turn";
+                label1.ForeColor = playerColors[GameController.CurrentPlayer];
             }
         }
 
@@ -56,6 +58,7 @@ namespace four_in_a_row
         {
             GameController.RestartGame();
             label1.Text = "Player's " + (GameController.CurrentPlayer + 1) + " turn";
+            label1.ForeColor = playerColors[GameController.CurrentPlayer];
             for (int i = 0; i < Constants.COLUMNSC; i++)
             {
                 try
@@ -90,6 +93,7 @@ namespace four_in_a_row
             playerColors[1] = Color.Blue;
             GameController.CurrentPlayer = 0;
             label1.Text = "Player's " + (GameController.CurrentPlayer + 1) + " turn";
+            label1.ForeColor = playerColors[0];
         }
 
         /// <summary>
@@ -183,6 +187,7 @@ namespace four_in_a_row
                 else if (row == (int)GameController.CountOfUsedCoins.FULL)
                 {
                     label1.Text = "Friendship wins!";
+                    label1.ForeColor = Color.Green;
                     GameController.IsCanPlay = false;
                 }
             }
